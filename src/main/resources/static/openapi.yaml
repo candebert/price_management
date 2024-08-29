@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
   title: Price management API
   version: 1.0.0
@@ -10,7 +10,7 @@ paths:
       parameters:
         - description: Current date
           explode: false
-          in: path
+          in: query
           name: date
           required: true
           schema:
@@ -19,7 +19,7 @@ paths:
           style: simple
         - description: Product ID
           explode: false
-          in: path
+          in: query
           name: product_id
           required: true
           schema:
@@ -28,7 +28,7 @@ paths:
           style: simple
         - description: Brand ID
           explode: false
-          in: path
+          in: query
           name: brand_id
           required: true
           schema:
