@@ -1,0 +1,84 @@
+openapi: 3.0.0
+info:
+  title: Price management API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /price_management/get_price:
+    get:
+      parameters:
+        - description: Current date
+          explode: false
+          in: path
+          name: date
+          required: true
+          schema:
+            format: date-time
+            type: string
+          style: simple
+        - description: Product ID
+          explode: false
+          in: path
+          name: product_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: Brand ID
+          explode: false
+          in: path
+          name: brand_id
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/price_response'
+          description: Price
+        "404":
+          description: Brand ID not found | Product ID not found | Date not found
+            | Brand ID + Product ID + Date not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/price_response'
+          description: Price
+      summary: "Get price by date, Product ID and Brand ID"
+components:
+  schemas:
+    price_response:
+      example:
+        end_date: 2000-01-23T04:56:07.000+00:00
+        price_list: 1
+        price: 5.962133916683182
+        product_id: 0
+        currency: currency
+        brand_id: 6
+        start_date: 2000-01-23T04:56:07.000+00:00
+      properties:
+        product_id:
+          format: int64
+          type: integer
+        brand_id:
+          type: integer
+        price_list:
+          type: integer
+        price:
+          type: number
+        currency:
+          type: string
+        start_date:
+          format: date-time
+          type: string
+        end_date:
+          format: date-time
+          type: string
+      type: object
