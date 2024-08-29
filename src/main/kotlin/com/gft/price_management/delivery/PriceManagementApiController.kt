@@ -4,11 +4,14 @@ import com.gft.price_management.delivery.model.PriceResponse
 import io.swagger.v3.oas.annotations.*
 import io.swagger.v3.oas.annotations.media.*
 import io.swagger.v3.oas.annotations.responses.*
+import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
 import org.springframework.web.bind.annotation.*
 import org.springframework.validation.annotation.Validated
+import java.time.LocalDate
+import java.util.Date
 
 @RestController
 @Validated
@@ -42,7 +45,7 @@ class PriceManagementApiController() {
         produces = ["application/json"]
     )
     fun priceManagementGetPriceGet(
-        @Parameter(description = "Current date", required = true) @RequestParam("date") date: java.time.OffsetDateTime,
+        @Parameter(description = "Current date", required = true) @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) date: LocalDate,
         @Parameter(description = "Product ID", required = true) @RequestParam("product_id") productId: Long,
         @Parameter(description = "Brand ID", required = true) @RequestParam("brand_id") brandId: Int):
             ResponseEntity<PriceResponse> {
