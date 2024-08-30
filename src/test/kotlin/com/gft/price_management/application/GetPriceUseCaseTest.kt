@@ -27,7 +27,7 @@ class GetPriceUseCaseTest {
         val priceMock = PriceEntity(
             brand = BrandEntity(1, "Zara"),
             currency = Currency.EUR,
-            price = 20.5,
+            price = 20.5.toBigDecimal(),
             product = ProductEntity(1L, "T-shirt w print N5"),
             priceList = 1,
             priority = 1,

@@ -16,6 +16,8 @@ import java.util.*
 @DataJpaTest
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@Transactional
+@Rollback
 class PriceRepositoryImplTest {
 
     @Autowired
@@ -23,12 +25,16 @@ class PriceRepositoryImplTest {
     @Autowired
     private lateinit var priceRepositoryImpl: PriceRepositoryImpl
 
-    private lateinit var brand: Brand
-    private lateinit var product: Product
+    private var brand: Brand = Brand(name =  "Inditest")
+    private var product: Product = Product(name =  "TestShirt")
+
+    @BeforeEach
+    fun setUp() {
+        testEntityManager.remove(brand)
+        testEntityManager.remove(product)
+    }
 
     @Test
-    @Transactional
-    @Rollback
     fun getPriceTest() {
         brand = testEntityManager.persist(Brand(name =  "Inditest"))
         product = testEntityManager.persist(Product(name =  "TestShirt"))
@@ -36,7 +42,7 @@ class PriceRepositoryImplTest {
             Price(
                 brand = brand,
                 product = product,
-                price = 30.5,
+                price = 30.5.toBigDecimal(),
                 priceList = 1,
                 priority = 1,
                 currency = "EUR",

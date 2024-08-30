@@ -11,7 +11,9 @@ class PriceRepositoryImpl @Autowired constructor(
     private val jpaPriceRepository: JpaPriceRepository
 ) : PriceRepository {
     override fun get(date: Date, brandId: Int, productId: Long): PriceEntity? {
-        TODO("Not yet implemented")
+        return jpaPriceRepository
+            .findBy(date, brandId, productId)
+            .first()
+            .toPriceEntity()
     }
-
 }

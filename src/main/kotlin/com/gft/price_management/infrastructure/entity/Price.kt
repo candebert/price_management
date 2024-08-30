@@ -1,6 +1,10 @@
 package com.gft.price_management.infrastructure.entity
 
+import com.gft.price_management.domain.entity.BrandEntity
+import com.gft.price_management.domain.entity.Currency
+import com.gft.price_management.domain.entity.PriceEntity
 import jakarta.persistence.*
+import java.math.BigDecimal
 import java.util.Date
 
 @Entity
@@ -24,11 +28,23 @@ data class Price (
 
     val currency: String,
 
-    val price: Number,
+    @Column(name = "price", precision = 10, scale = 2)
+    val price: BigDecimal,
 
     @Column(name = "start_date")
     val startDate: Date,
 
     @Column(name = "end_date")
     val endDate: Date
-)
+) {
+        fun toPriceEntity() = PriceEntity(
+            brand = brand.toBrandEntity(),
+            product = product.toProductEntity(),
+            priceList = priceList,
+            priority = priority,
+            price = price,
+            currency = Currency.getCurrency(currency),
+            startDate = startDate,
+            endDate = endDate
+        )
+}
