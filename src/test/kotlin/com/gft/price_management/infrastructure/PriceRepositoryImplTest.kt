@@ -36,7 +36,7 @@ class PriceRepositoryImplTest {
     }
 
     @Test
-    fun getPriceTest() {
+    fun `when call tu get w valid brand, product and date then return a price object`() {
         brand = testEntityManager.persist(Brand(name =  "Inditest"))
         product = testEntityManager.persist(Product(name =  "TestShirt"))
         val price = testEntityManager.persist(

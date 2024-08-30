@@ -20,7 +20,7 @@ class GetPriceUseCaseTest {
     private val getPriceUseCase: GetPriceUseCase = GetPriceUseCase(priceRepository)
 
     @Test
-    fun getPriceTest() {
+    fun `when call to repository w a correct request then this return a correct price object`() {
         val productId = 1L
         val brandId = 1
         val date = Date(2024, 6, 5, 8, 30)

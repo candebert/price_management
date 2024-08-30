@@ -43,8 +43,9 @@ class PriceManagementApiController() {
         value = ["/price_management/get_price"],
         produces = ["application/json"]
     )
-    fun priceManagementGetPriceGet(
-        @Parameter(description = "Current date", required = true) @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) date: LocalDate,
+    fun getPrice(
+        @Parameter(description = "Current date", required = true)
+        @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) date: LocalDate,
         @Parameter(description = "Product ID", required = true) @RequestParam("product_id") productId: Long,
         @Parameter(description = "Brand ID", required = true) @RequestParam("brand_id") brandId: Int):
             ResponseEntity<PriceResponse> {
