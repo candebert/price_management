@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.validation.annotation.Validated
 import java.time.LocalDate
-import java.util.Date
 
 @RestController
 @Validated
