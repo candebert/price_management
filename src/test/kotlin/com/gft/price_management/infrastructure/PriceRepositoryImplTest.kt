@@ -12,6 +12,7 @@ import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import java.util.*
+import kotlin.test.assertEquals
 
 @DataJpaTest
 @ActiveProfiles("test")
@@ -52,9 +53,9 @@ class PriceRepositoryImplTest {
         )
         testEntityManager.flush()
 
-        assertThrows<NotImplementedError> {
-            priceRepositoryImpl
-                .get(Date(2024, 6, 30, 8, 30), 1, 1)
-        }
+        val responsePrice = priceRepositoryImpl
+            .get(Date(2024, 6, 30, 8, 30), 1, 1)
+
+        assertEquals(price.toPriceEntity(), responsePrice)
     }
 }
