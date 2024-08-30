@@ -40,6 +40,17 @@ class GetPriceUseCaseTest {
 
         assertEquals(response, priceMock)
     }
+
+    @Test
+    fun notFoundPriceTest() {
+        val productId = 1L
+        val brandId = 1
+        val date = Date(2024, 6, 5, 8, 30)
+        every { priceRepository.get(any(), any(), any()) } returns null
+
+        assertThrows<NotFoundException> {
+            getPriceUseCase.invoke(date, brandId, productId)
+        }
     }
 
 }
