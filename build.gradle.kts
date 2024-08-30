@@ -29,10 +29,11 @@ dependencies {
 	implementation("org.webjars:swagger-ui:4.19.0")
 	implementation("org.webjars:webjars-locator-core:0.55")
 
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	runtimeOnly("com.h2database:h2")
 
 	implementation("com.google.code.findbugs:jsr305:3.0.2")
 	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
-	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation ("org.springframework.boot:spring-boot-starter-validation")
@@ -42,6 +43,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testImplementation("io.mockk:mockk:1.9.3")
+	testImplementation("com.h2database:h2")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
