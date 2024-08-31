@@ -11,9 +11,7 @@ class PriceRepositoryImpl @Autowired constructor(
     private val jpaPriceRepository: JpaPriceRepository
 ) : PriceRepository {
     override fun get(date: Date, brandId: Int, productId: Long): PriceEntity? {
-        return jpaPriceRepository
-            .findBy(date, brandId, productId)
-            .first()
-            .toPriceEntity()
+        val response = jpaPriceRepository.findBy(date, brandId, productId)
+        return response.takeIf { it.isNotEmpty() }?.first()?.toPriceEntity()
     }
 }

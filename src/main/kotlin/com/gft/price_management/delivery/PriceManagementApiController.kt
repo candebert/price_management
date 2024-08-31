@@ -1,5 +1,7 @@
 package com.gft.price_management.delivery
 
+import com.gft.price_management.application.GetPriceUseCase
+import com.gft.price_management.delivery.mapper.PriceMapper.toPriceResponse
 import com.gft.price_management.delivery.model.PriceResponse
 import io.swagger.v3.oas.annotations.*
 import io.swagger.v3.oas.annotations.media.*
@@ -10,12 +12,14 @@ import org.springframework.http.ResponseEntity
 
 import org.springframework.web.bind.annotation.*
 import org.springframework.validation.annotation.Validated
+import java.time.Instant
 import java.time.LocalDate
+import java.util.*
 
 @RestController
 @Validated
 @RequestMapping("\${api.base-path:}")
-class PriceManagementApiController() {
+class PriceManagementApiController(private val getPriceUseCase: GetPriceUseCase) {
 
     @Operation(
         summary = "Get price by date, Product ID and Brand ID",
@@ -49,6 +53,10 @@ class PriceManagementApiController() {
         @Parameter(description = "Product ID", required = true) @RequestParam("product_id") productId: Long,
         @Parameter(description = "Brand ID", required = true) @RequestParam("brand_id") brandId: Int):
             ResponseEntity<PriceResponse> {
-        return ResponseEntity(HttpStatus.NOT_IMPLEMENTED)
+        val javaDate = Date.from(
+            date.atStartOfDay(Instant.now().atZone(java.time.ZoneId.systemDefault()).getOffset()).toInstant()
+        )
+        val response = getPriceUseCase(javaDate, brandId, productId)
+        return ResponseEntity(response.toPriceResponse(), HttpStatus.OK)
     }
 }

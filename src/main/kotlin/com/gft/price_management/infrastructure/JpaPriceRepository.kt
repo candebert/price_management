@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param
 import java.util.*
 
 interface JpaPriceRepository : JpaRepository<Price, Long> {
+
     @Query("SELECT p FROM Price p " +
             "WHERE :currentDate BETWEEN p.startDate " +
             "AND p.endDate AND p.product.id = :productId " +

@@ -13,6 +13,7 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import java.util.*
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @DataJpaTest
 @ActiveProfiles("test")
@@ -57,5 +58,29 @@ class PriceRepositoryImplTest {
             .get(Date(2024, 6, 30, 8, 30), 1, 1)
 
         assertEquals(price.toPriceEntity(), responsePrice)
+    }
+
+    @Test
+    fun `when date don't match then return a empty response`() {
+        brand = testEntityManager.persist(Brand(name =  "Inditest"))
+        product = testEntityManager.persist(Product(name =  "TestShirt"))
+        val price = testEntityManager.persist(
+            Price(
+                brand = brand,
+                product = product,
+                price = 30.5.toBigDecimal(),
+                priceList = 1,
+                priority = 1,
+                currency = "EUR",
+                startDate = Date(2024, 6, 5, 8, 30),
+                endDate = Date(2024, 7, 5, 19, 30)
+            )
+        )
+        testEntityManager.flush()
+
+        val responsePrice = priceRepositoryImpl
+            .get(Date(2024, 8, 30, 8, 30), 1, 1)
+
+        assertTrue(responsePrice == null)
     }
 }
