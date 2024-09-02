@@ -2,7 +2,7 @@
 This is a test project from GFT.
 
 ## MVP
-Return information about prices. This prices are getting by a specific date, brand ID and product ID.
+Return information about prices. These prices are getting by a specific date, brand ID and product ID.
 
 ## Contract
 

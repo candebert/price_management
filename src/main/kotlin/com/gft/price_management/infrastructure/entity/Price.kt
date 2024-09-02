@@ -1,6 +1,5 @@
 package com.gft.price_management.infrastructure.entity
 
-import com.gft.price_management.domain.entity.BrandEntity
 import com.gft.price_management.domain.entity.Currency
 import com.gft.price_management.domain.entity.PriceEntity
 import jakarta.persistence.*

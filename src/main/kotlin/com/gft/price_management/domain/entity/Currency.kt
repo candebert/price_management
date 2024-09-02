@@ -12,17 +12,6 @@ enum class Currency {
                 if(it.toString() == currency) return it
             }
             throw BadAttributeValueExpException(currency)
-            /*return when (currency.uppercase()) {
-                "EUR" -> EUR
-                "ARS" -> ARS
-                "MAD" -> MAD
-                "INR" -> INR
-                "PKR" -> PKR
-                "BDT" -> BDT
-                "VND" -> VND
-                "CNY" -> CNY
-                "BRL" -> BRL
-            }*/
         }
     }
 
