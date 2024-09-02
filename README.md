@@ -27,3 +27,15 @@ Return information about prices. This prices are getting by a specific date, bra
  (404) Brand ID + Product ID + Date not found
 ```
 
+## Run project
+
+# 1. Build Docker image
+```
+docker build -t price_management .
+```
+
+# 2. Run project
+```
+docker run -p 8080:8080 price_management
+```
+# 3. [Go to Contract](http://localhost:8080)
