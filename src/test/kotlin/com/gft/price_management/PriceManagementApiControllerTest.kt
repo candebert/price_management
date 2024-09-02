@@ -13,6 +13,7 @@ import io.mockk.mockk
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.ResponseEntity
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.test.assertEquals
 
@@ -25,8 +26,8 @@ class PriceManagementApiControllerTest {
 
 	@Test
 	fun `when call to controller w correct brand product and date then return a correct response entity`() {
-		val testDate = LocalDate.now()
-		val date: LocalDate = testDate
+		val testDate = LocalDateTime.now()
+		val date: LocalDateTime = testDate
 		val productId: Long = 1
 		val brandId = 1
 		val priceEntity = PriceEntity(

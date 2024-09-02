@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.validation.annotation.Validated
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 @RestController
@@ -49,13 +50,11 @@ class PriceManagementApiController(private val getPriceUseCase: GetPriceUseCase)
     )
     fun getPrice(
         @Parameter(description = "Current date", required = true)
-        @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) date: LocalDate,
+        @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) date: LocalDateTime,
         @Parameter(description = "Product ID", required = true) @RequestParam("product_id") productId: Long,
         @Parameter(description = "Brand ID", required = true) @RequestParam("brand_id") brandId: Int):
             ResponseEntity<PriceResponse> {
-        val javaDate = Date.from(
-            date.atStartOfDay(Instant.now().atZone(java.time.ZoneId.systemDefault()).getOffset()).toInstant()
-        )
+        val javaDate = Date.from(date.atZone(java.time.ZoneId.systemDefault()).toInstant())
         val response = getPriceUseCase(javaDate, brandId, productId)
         return ResponseEntity(response.toPriceResponse(), HttpStatus.OK)
     }

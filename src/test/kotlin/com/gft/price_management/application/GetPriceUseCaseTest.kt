@@ -42,7 +42,7 @@ class GetPriceUseCaseTest {
     }
 
     @Test
-    fun notFoundPriceTest() {
+    fun `when call to a repository for a no exist price then return exception`() {
         val productId = 1L
         val brandId = 1
         val date = Date(2024, 6, 5, 8, 30)
@@ -52,5 +52,12 @@ class GetPriceUseCaseTest {
             getPriceUseCase.invoke(date, brandId, productId)
         }
     }
+
+    /*-          Test 1: petición a las 10:00 del día 14 del producto 35455   para la brand 1 (ZARA)
+-          Test 2: petición a las 16:00 del día 14 del producto 35455   para la brand 1 (ZARA)
+-          Test 3: petición a las 21:00 del día 14 del producto 35455   para la brand 1 (ZARA)
+-          Test 4: petición a las 10:00 del día 15 del producto 35455   para la brand 1 (ZARA)
+-          Test 5: petición a las 21:00 del día 16 del producto 35455   para la brand 1 (ZARA)
+    * */
 
 }

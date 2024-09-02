@@ -56,13 +56,13 @@ components:
   schemas:
     price_response:
       example:
-        end_date: 2000-01-23T04:56:07.000+00:00
+        end_date: "2000-01-23T04:56:07"
         price_list: 1
-        price: 5.962133916683182
+        price: 5.96
         product_id: 0
         currency: currency
         brand_id: 6
-        start_date: 2000-01-23T04:56:07.000+00:00
+        start_date: "2000-01-23T04:56:07"
       properties:
         product_id:
           format: int64
@@ -76,9 +76,9 @@ components:
         currency:
           type: string
         start_date:
-          format: date-time
           type: string
+          format: date-time
         end_date:
-          format: date-time
           type: string
+          format: date-time
       type: object
